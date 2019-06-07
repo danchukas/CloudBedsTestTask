@@ -1,6 +1,8 @@
+const api_address = 'http://localhost:8069';
+
 function reloadIntervals() {
     $.ajax({
-        url: 'http://localhost:8069/getFullPriceList',             // указываем URL и
+        url: api_address + '/getFullPriceList',             // указываем URL и
         dataType: "json",                     // тип загружаемых данных
         success: function (data, textStatus) { // вешаем свой обработчик на функцию success
             var intervals = '';
@@ -28,7 +30,7 @@ $(document).ready(function() {
     $(document).on('click', '.delete', function () {
         var row = $(this.parentElement.parentElement);
         $.ajax({
-            url: 'http://localhost:8069/deleteInterval',             // указываем URL и
+            url: api_address + '/deleteInterval',             // указываем URL и
             method: 'POST',
             data: {
                 id: row.find('td')[0].textContent,
@@ -51,7 +53,7 @@ $(document).ready(function() {
 
         var form = $(this);
         $.ajax({
-            url: 'http://localhost:8069/addInterval',             // указываем URL и
+            url: api_address + '/addInterval',             // указываем URL и
             method: 'POST',
             data: {
                 date_start: form.find('input')[0].value,
@@ -66,41 +68,4 @@ $(document).ready(function() {
 
         return false;
     });
-
-
-    // $('#show-add').click(function() {
-    //     $('#link-add').slideDown(500);
-    //     $('#show-add').hide();
-    // });
-    //
-    // $('#add').click(function() {
-    //     var name = $('#name').val();
-    //     var username = $('#username').val();
-    //     var password = $('#password').val();
-    //
-    //     $.ajax({
-    //         url: "http://localhost:8069/addInterval",
-    //         type: "POST",
-    //         data: { date_start: name, date_end: username, price: password },
-    //         success: function(data, status, xhr) {
-    //             $('#name').val('');
-    //             $('#username').val('');
-    //             $('#password').val('');
-    //             $.get("http://localhost:8069/getFullPriceList", function(html) {
-    //                 $("#table_content").html(html);
-    //             });
-    //             $('#records_content').fadeOut(1100).html(data);
-    //         },
-    //         error: function() {
-    //             $('#records_content').fadeIn(3000).html('<div class="text-center">error here</div>');
-    //         },
-    //         beforeSend: function() {
-    //             $('#records_content').fadeOut(700).html('<div class="text-center">Loading...</div>');
-    //         },
-    //         complete: function() {
-    //             $('#link-add').hide();
-    //             $('#show-add').show(700);
-    //         }
-    //     });
-    // });
 });

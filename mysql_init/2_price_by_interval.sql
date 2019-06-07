@@ -23,7 +23,7 @@ USE cloudbeds_test_task;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `price_by_date_interval` (
+CREATE TABLE `price_by_interval` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date_start` date NOT NULL,
   `date_end` date NOT NULL,
