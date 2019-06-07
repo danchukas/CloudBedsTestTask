@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD</title>
+</head>
+
+<body>
+
+    <table>
+        <tbody>
+        </tbody>
+    </table>
+
+    <form action="/addInterval">
+        <input type="date" name="date_start" value="2019-01-01"/>
+        <input type="date" name="date_and" value="2019-01-02"/>
+        <input type="number" name="price" value="7"/>
+        <button type="submit">Add new interval</button>
+    </form>
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>

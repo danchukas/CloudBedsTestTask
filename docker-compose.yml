@@ -1,0 +1,40 @@
+version: '3.2'
+
+services:
+
+    cloudbeds_test_task:
+        container_name: cloudbeds_test_task
+        build:
+            context: .
+            args:
+            - project_root=/data/cloudbeds_test_task
+        volumes:
+        - .:/data/cloudbeds_test_task
+        environment:
+            - DB_HOST=cloudbeds_test_task_db
+            - DB_USER=tester
+            - DB_PASSWORD=tester
+            - DB_DATABASE=cloudbeds_test_task
+        ports:
+        - "8069:8069"
+        - "8068:8068"
+        networks:
+        - backend
+
+    cloudbeds_test_task_db:
+        container_name: cloudbeds_test_task_db
+        image: mysql:5.7
+        volumes:
+          - ./mysql_init:/docker-entrypoint-initdb.d
+        environment:
+        - MYSQL_ROOT_PASSWORD=rootpassword
+        - MYSQL_USER=tester
+        - MYSQL_PASSWORD=tester
+        - MYQSL_DATABASE=cloudbeds_test_task
+        ports:
+        - "33062:3306"
+        networks:
+        - backend
+
+networks:
+    backend:
