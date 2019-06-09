@@ -26,17 +26,17 @@ class IntervalsJoiner
         $this->intervalInserter = $intervalInserter;
     }
 
-    public function joinIntervals(PriceList $saved_intervals, PriceList $newIntervals): void
+    public function joinIntervals(PriceList $savedIntervals, PriceList $newIntervals): void
     {
         // todo: improve by multi_query
         // todo: improve by delete related intervals + insert correct intervals
 
-        $updated_intervals = $this->intervalUpdater->updateChangedIntervals($saved_intervals, $newIntervals);
+        $updatedIntervals = $this->intervalUpdater->updateChangedIntervals($savedIntervals, $newIntervals);
 
-        $unused_intervals = $saved_intervals->diffById($updated_intervals);
-        $unsaved_intervals = $newIntervals->diff($updated_intervals);
-        $unsaved_intervals = $this->intervalOverrider->overrideIntervals($unused_intervals, $unsaved_intervals);
+        $unusedIntervals = $savedIntervals->diffById($updatedIntervals);
+        $unsavedIntervals = $newIntervals->diff($updatedIntervals);
+        $unsavedIntervals = $this->intervalOverrider->overrideIntervals($unusedIntervals, $unsavedIntervals);
 
-        $this->intervalInserter->insertIntervals($unsaved_intervals);
+        $this->intervalInserter->insertIntervals($unsavedIntervals);
     }
 }
