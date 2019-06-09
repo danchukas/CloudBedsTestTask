@@ -48,13 +48,14 @@ class SelectInterval extends StaticSqlQuery
     protected function createQuery(): string
     {
         $query = '
-            DELETE
+            SELECT *
                 FROM price_by_interval 
                 WHERE
                     id = ?
                     AND date_start = ?
                     AND date_end = ?
                     AND ROUND(price, 6) = ?
+            FOR UPDATE 
         ';
 
         return $query;
