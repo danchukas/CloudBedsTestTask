@@ -5,10 +5,14 @@ namespace App\Model;
 
 use App\Database;
 use App\Entity\Interval;
+use App\Sql\SelectInterval;
 use Throwable;
 
 class PriceListEditor
 {
+    /** @var SelectInterval */
+    private $selectInterval;
+
     /** @var RelatedIntervalsSearcher */
     private $relatedIntervalsSearcher;
 
@@ -19,10 +23,12 @@ class PriceListEditor
     private $database;
 
     public function __construct(
+        SelectInterval $selectInterval,
         RelatedIntervalsSearcher $relatedIntervalsSearcher,
         IntervalsJoiner $intervalsJoiner,
         Database $database
     ) {
+        $this->selectInterval = $selectInterval;
         $this->relatedIntervalsSearcher = $relatedIntervalsSearcher;
         $this->intervalsJoiner = $intervalsJoiner;
         $this->database = $database;
@@ -33,7 +39,6 @@ class PriceListEditor
         $this->database->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
 
         try {
-
             $saved_intervals = $this->relatedIntervalsSearcher->searchRelatedIntervals($newInterval);
             $new_price_list = $saved_intervals->cloneSelf();
 
@@ -54,8 +59,9 @@ class PriceListEditor
         $this->database->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
 
         try {
-
             $saved_intervals = $this->relatedIntervalsSearcher->searchRelatedIntervals($newInterval);
+            // @todo: check existing of interval in DB, check existing of interval in PriceList
+            $saved_intervals->addInterval($currentInterval);
             $new_price_list = $saved_intervals->cloneSelf();
 
             $new_price_list->deleteInterval($currentInterval);

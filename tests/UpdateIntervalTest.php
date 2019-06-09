@@ -40,6 +40,13 @@ class UpdateIntervalTest extends TestCase
                 ],
                 $interval_for_update
             ],
+            'excepted situation' => [
+                [
+                    [1, '2019-05-29', '2019-05-31', 6],
+                    [2, '2019-03-29', '2019-03-31', 8],
+                ],
+                [2, '2018-03-29', '2018-03-31', 4]
+            ],
         ];
     }
 

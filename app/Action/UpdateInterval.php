@@ -89,8 +89,8 @@ class UpdateInterval implements ActionInterface
         $price = $this->getPrice($request, 'current_price');
         $id = $this->getId($request, 'current_id');
 
-        $customer_new_interval = new Interval($date_start, $date_end, $price, $id);
+        $current_interval = new Interval($date_start, $date_end, $price, $id);
 
-        return $customer_new_interval;
+        return $current_interval;
     }
 }
