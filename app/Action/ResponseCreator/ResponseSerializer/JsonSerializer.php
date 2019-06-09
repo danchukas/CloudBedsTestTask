@@ -28,7 +28,7 @@ class JsonSerializer
         $this->serializer = new Serializer($normalizers, $encoders);
     }
 
-    public function serialize(object $entity): string
+    public function serialize($entity): string
     {
         $serializedEntity = $this->serializer->serialize($entity, self::SERIALIZE_FORMAT);
 
