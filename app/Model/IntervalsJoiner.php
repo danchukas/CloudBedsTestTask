@@ -7,7 +7,7 @@ use App\Entity\PriceList;
 
 class IntervalsJoiner
 {
-    /** @var PriceListsUpdater */
+    /** @var PriceListUpdater */
     private $intervalUpdater;
 
     /** @var IntervalsOverrider */
@@ -17,7 +17,7 @@ class IntervalsJoiner
     private $intervalInserter;
 
     public function __construct(
-        PriceListsUpdater $intervalUpdater,
+        PriceListUpdater $intervalUpdater,
         IntervalsOverrider $intervalOverrider,
         IntervalsInserter $intervalInserter
     ) {
@@ -28,6 +28,9 @@ class IntervalsJoiner
 
     public function joinIntervals(PriceList $saved_intervals, PriceList $newIntervals): void
     {
+        // todo: improve by multi_query
+        // todo: improve by delete related intervals + insert correct intervals
+
         $updated_intervals = $this->intervalUpdater->updateChangedIntervals($saved_intervals, $newIntervals);
 
         $unused_intervals = $saved_intervals->diffById($updated_intervals);

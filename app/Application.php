@@ -6,6 +6,7 @@ use App\Action\ActionInterface;
 use App\Action\AddInterval;
 use App\Action\DeleteInterval;
 use App\Action\GetFullPriceList;
+use App\Action\UpdateInterval;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,6 +55,7 @@ class Application
         $routes->add('addInterval', $this->createAddIntervalRoute());
         $routes->add('getFullPriceList', $this->createGetFullPriceListRoute());
         $routes->add('deleteIntervals', $this->createDeleteIntervalRoute());
+        $routes->add('updateIntervals', $this->createUpdateIntervalRoute());
 
         return $routes;
     }
@@ -82,6 +84,16 @@ class Application
     {
         $route = new Route('/deleteInterval', [
             '_controller' => DeleteInterval::class
+        ]);
+        $route->setMethods(Request::METHOD_POST);
+
+        return $route;
+    }
+
+    private function createUpdateIntervalRoute(): Route
+    {
+        $route = new Route('/updateInterval', [
+            '_controller' => UpdateInterval::class
         ]);
         $route->setMethods(Request::METHOD_POST);
 

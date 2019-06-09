@@ -102,7 +102,7 @@ class AddIntervalTest extends TestCase
                     VALUES (?, ? , ?)
             ');
 
-            foreach ($existed_intervals as &$interval) {
+            foreach ($existed_intervals as $interval) {
                 $stmt->bind_param('sss', $interval[0], $interval[1], $interval[2]);
                 $stmt->execute();
             }

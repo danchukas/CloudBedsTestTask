@@ -200,6 +200,16 @@ class PriceList implements IteratorAggregate
         return $intervalsWithId;
     }
 
+    public function deleteInterval(Interval $interval): void
+    {
+        foreach ($this->intervals as $key => $innerInterval) {
+            if ($innerInterval == $interval) {
+                unset($this->intervals[$key]);
+                break;
+            }
+        }
+    }
+
     /**
      * Relate calls "clone $object" with method "__clone" of "$object"
      * because IDE (PHPSTORM) don't relate them.

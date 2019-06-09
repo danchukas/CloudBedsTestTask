@@ -7,7 +7,7 @@ namespace App\Model;
 use App\Sql\UpdatePriceByInterval;
 use App\Entity\PriceList;
 
-class PriceListsUpdater
+class PriceListUpdater
 {
     /** @var UpdatePriceByInterval */
     private $updatePriceByInterval;
