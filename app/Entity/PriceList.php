@@ -61,6 +61,7 @@ class PriceList implements IteratorAggregate
 
     private function removeCrossingDates(Interval $newInterval): void
     {
+        $this->intervals = array_values($this->intervals);
         foreach ($this->intervals as $position => $interval) {
             if ($newInterval->isItStartsNotLater($interval)) {
                 $isIntervalFullyCrossedOver = $interval->isItEndsNotLater($newInterval);
@@ -97,6 +98,7 @@ class PriceList implements IteratorAggregate
     private function insertInterval(Interval $newInterval): void
     {
         $interval_added = false;
+        $this->intervals = array_values($this->intervals);
         foreach ($this->intervals as $position => $interval) {
             if ($newInterval->isBefore($interval)) {
                 array_splice($this->intervals, $position, 0, [$newInterval]);

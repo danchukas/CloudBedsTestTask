@@ -86,6 +86,17 @@ class AddIntervalTest extends TestCase
                     $newInterval_1
                 ]
             ],
+            'overwriteConsecutiveIntervals' => [
+                [
+                    ['2019-05-01', '2019-05-03', $anyPrice],
+                    ['2019-05-04', '2019-05-21', '45'],
+                    ['2019-05-22', '2019-05-25', $anyPrice]
+                ],
+                ['2019-05-03', '2019-05-21', $anyPrice],
+                [
+                    ['2019-05-01', '2019-05-25', $anyPrice]
+                ]
+            ]
         ];
     }
 
